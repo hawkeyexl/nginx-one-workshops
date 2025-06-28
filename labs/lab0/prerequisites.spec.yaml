@@ -1,0 +1,18 @@
+tests:
+  - testId: lab0
+    steps:
+      # Link checking
+      - checkLink: https://www.f5.com/trials/nginx-one
+      - checkLink: https://www.f5.com/products/distributed-cloud-services/distributed-cloud-console
+      - checkLink: https://docs.docker.com/engine/install/
+      - checkLink: https://docs.docker.com/compose/install/
+      - checkLink: https://code.visualstudio.com/download
+      - checkLink: https://docs.nginx.com/nginx/admin-guide/
+      - checkLink: https://docs.nginx.com/nginx/technical-specs/
+      - checkLink: https://github.com/nginxinc/nginx-one-workshops/blob/main/labs/lab1/readme.md
+      - checkLink: https://github.com/nginxinc/nginx-one-workshops/blob/main/labs/readme.md
+      # Dependency checking
+      - runShell: which git
+      - runShell: which docker
+      # Clone the repository
+      - runShell: git clone https://github.com/nginxinc/nginx-one-workshops.git

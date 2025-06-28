@@ -1,0 +1,66 @@
+tests:
+  - testId: lab1
+    steps:
+      - goTo: https://console.ves.volterra.io/login/start
+      - screenshot:
+          savePath: lab1_xc-login.png
+          directory: media
+      - find:
+          selector: "#vsui-input-0"
+          click: true
+          type: $DOMAIN
+      - find:
+          selector: "#username"
+          click: true
+          type: $USERNAME
+      - find:
+          selector: "#password"
+          click: true
+          type: $PASSWORD
+      - screenshot: media/lab1_none-tile.png
+      - click: NGINX One
+      - screenshot: media/lab1_none-service.png
+      - find: Enabled
+      - click: Visit Service
+      - screenshot: media/lab1-none-empty-overview-dashboard.png
+      # Create a data plane key
+      - find: Manage
+      - click: Data Plane Keys
+      - screenshot: media/lab1_none-dataplane-key-overview.png
+      - click: Add Data Plane Key
+      - find: Add Data Plane Key
+      - find:
+          selector: "#name" # Need to update with correct selector
+          click: true
+          type: $DATAPLANE_KEY_NAME
+      - screenshot: media/lab1_non-dataplane-key-new.png
+      - click: Generate
+      - screenshot: media/lab1_none-dataplane-key-save.png
+      - find:
+          selector: "#dataplan-key-value" # Need to update with correct selector
+        variables:
+          DATAPLANE_KEY: $$element.text
+      - click: Close
+      # Revoke a data plane key
+      - click: $DATAPLANE_KEY_NAME
+      - screenshot: media/lab1_none-dataplane-key-revoke1.png
+      - click: Revoke
+      - screenshot: media/lab1_none-dataplane-key-revoke2.png
+      - click: Revoke
+      # Delete a data plane key
+      - click: Revoked Keys
+      - screenshot: media/lab1_none-dataplane-key-revoke-list.png
+      - click: input[type='checkbox'] # Need to update with correct selector
+      - screenshot: media/lab1_none-dataplane-key-delete1.png
+      - click: Delete Selected
+      - screenshot: media/lab1_none-dataplane-key-delete2.png
+      - click: Delete
+      # Link checking
+      - checkLink: https://docs.nginx.com/nginx-one/
+      - checkLink: https://docs.nginx.com/nginx-agent/overview/
+      - checkLink: https://github.com/nginxinc/nginx-one-workshops/blob/main/labs/lab2/readme.md
+      - checkLink: https://github.com/nginxinc/nginx-one-workshops/blob/main/labs/readme.md
+
+
+      # Need to capture the following screenshot after the dashboard is populated, possibly in a different or standalone test
+      # - screenshot: media/lab1_none-overview-dashboard.png
