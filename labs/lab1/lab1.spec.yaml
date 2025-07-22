@@ -3,7 +3,7 @@ tests:
     steps:
       - goTo: https://console.ves.volterra.io/login/start
       - screenshot:
-          savePath: lab1_xc-login.png
+          path: lab1_xc-login.png
           directory: media
       - find:
           selector: "#vsui-input-0"
